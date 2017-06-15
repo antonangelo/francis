@@ -7,7 +7,7 @@ information about them as possible, and creating a tab-delimited output file.
 Prerequisites
 python3
 
-
+<anton@angelo.nz> July 2017
 '''
 import os, datetime, time, re
 from os.path import join, getsize
@@ -45,7 +45,7 @@ def findfiletype(text):
         print(text) #output the text causing the error to standard output
     return match
    
-# variable initialisations
+#output the text causing the error to standard output
 dirsize = 0 # this will increment as each file is recorded
 filedetails = '' #this will hold lines of file information, and then we write the file information after the directory.
 
