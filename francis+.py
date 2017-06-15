@@ -20,8 +20,8 @@ from wand.image import Image
 
 #SETUP
 
-outputfilename = "digitalarchive_170615" # set this to what your outputfile name - maybe autocreate?
-directorytoscanfrom = "U:\Bulk\LibraryDigital\DigitalArchive" # top directory to start scanning from
+outputfilename = "results/digitalarchive_170615.tsv" # set this to what your outputfile name - maybe autocreate?
+directorytoscanfrom = "./data" # top directory to start scanning from
 
 
 def ucode(text):
@@ -76,7 +76,7 @@ outputfile.write(
     imagetype \t \
     exifdata \n")
 
-for root, dirs, files in os.walk('data'):
+for root, dirs, files in os.walk(directorytoscanfrom):
     
     for name in files:
         path = os.path.join(root, name)
