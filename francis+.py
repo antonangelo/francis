@@ -26,12 +26,8 @@ directorytoscanfrom = "./data" # top directory to start scanning from
 
 def ucode(text):
     # replace odd characters in filenames - quotes, and other weirdness
-    text = text.replace("\u2019","'")
-    text = text.replace('\u201c','"')
-    text = text.replace('\u201d','"')
-    text = text.replace('\uf020','?')
-    text = text.replace('\uf022','?')
-    return text
+    text = text.encode('utf-8', 'ignore')
+    return text.decode(encoding='utf-8', errors='replace')
 
 def sizeof_fmt(num, suffix='B'):
     # format from bytes to nice human readable units

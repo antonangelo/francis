@@ -1,3 +1,4 @@
+#  -*- coding: utf-8 -*-
 '''
 francis.py
 
@@ -9,22 +10,20 @@ python3
 
 <anton@angelo.nz> July 2017
 '''
-import os, datetime, time, re
+
+
+import os, datetime, time, re, sys 
 from os.path import join, getsize
 
 # SETUP
 
-outputfilename = "digitalarchive_170615" # set this to what your outputfile name - maybe autocreate?
-directorytoscanfrom = "U:\Bulk\LibraryDigital\DigitalArchive" # top directory to start scanning from
+outputfilename = "./LIBR-Library_170705.tsv" # set this to what your outputfile name - maybe autocreate?
+directorytoscanfrom = "K:\LIBR-Library" # top directory to start scanning from
 
-def ucode(text):
-    # replace odd characters in filenames - quotes, and other weirdness
-    text = text.replace("\u2019","'")
-    text = text.replace('\u201c','"')
-    text = text.replace('\u201d','"')
-    text = text.replace('\uf020','?')
-    text = text.replace('\uf022','?')
-    return text
+def ucode(text): # deal to windows characters
+
+    text = text.encode('utf-8', 'ignore')
+    return text.decode(encoding='utf-8', errors='replace')
 
 def sizeof_fmt(num, suffix='B'):
     # format from bytes to nice human readable units
@@ -50,7 +49,7 @@ dirsize = 0 # this will increment as each file is recorded
 filedetails = '' #this will hold lines of file information, and then we write the file information after the directory.
 
 
-outputfile = open(outputfilename, 'w') 
+outputfile = open(outputfilename, encoding='utf-8', mode='w+') 
 
 # write a header row 
 outputfile.write(
@@ -81,6 +80,7 @@ for root, dirs, files in os.walk(directorytoscanfrom):
         dirsize = dirsize + filesize
         filetype =  findfiletype(name)
         filedetails =  filedetails + ucode(root) + "\t" + "file" + "\t" +ucode(name) +  "\t" + filetype + "\t\t\t" + sizeof_fmt(filesize) + "\t" + str(filesize) + "\t"+  created + "\t" +  modified + "\n"
+        # print(filedetails)
     dircreated = datetime.datetime.fromtimestamp(os.path.getctime(root)).strftime("%Y-%m-%d")
     dirmodified = datetime.datetime.fromtimestamp(os.path.getmtime(root)).strftime("%Y-%m-%d")
     outputfile.write(
