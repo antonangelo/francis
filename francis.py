@@ -75,8 +75,8 @@ for root, dirs, files in os.walk(directorytoscanfrom):
             modified = datetime.datetime.fromtimestamp(os.path.getmtime(path)).strftime("%Y-%m-%d")
         except:
             filesize = 0
-            created = '99-99-99'
-            modified = '99-99-99'
+            created = '01-01-70' #set date to unix epoch if there is an issue
+            modified = '01-01-70'
         dirsize = dirsize + filesize
         filetype =  findfiletype(name)
         filedetails =  filedetails + ucode(root) + "\t" + "file" + "\t" +ucode(name) +  "\t" + filetype + "\t\t\t" + sizeof_fmt(filesize) + "\t" + str(filesize) + "\t"+  created + "\t" +  modified + "\n"
