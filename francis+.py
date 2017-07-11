@@ -20,7 +20,7 @@ from wand.image import Image
 
 #SETUP
 
-outputfilename = "results/digitalarchive_170615.tsv" # set this to what your outputfile name - maybe autocreate?
+outputfilename = "results/data_170710.tsv" # set this to what your outputfile name - maybe autocreate?
 directorytoscanfrom = "./data" # top directory to start scanning from
 
 
@@ -82,8 +82,8 @@ for root, dirs, files in os.walk(directorytoscanfrom):
             modified = datetime.datetime.fromtimestamp(os.path.getmtime(path)).strftime("%Y-%m-%d")
         except:
             filesize = 0
-            created = '99-99-99'
-            modified = '99-99-99'
+            created = '01-01-01' # if there are issues, set the date to the Unix epoch
+            modified = '01-01-01'
         with magic.Magic() as m: #use filemagic to get fileinfo
             fileinfo = m.id_filename(path)
             #print(fileinfo)
